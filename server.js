@@ -12,6 +12,7 @@ const SECRET_SESSION = process.env.SECRET_SESSION
 
 app.set('view engine', 'ejs');
 
+// MIDDLEWARE
 app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
@@ -31,6 +32,7 @@ app.use((req, res, next) =>{
 app.use(passport.initialize());
 app.use(passport.session());
 
+// ROUTES
 app.get('/', (req, res) => {
   res.render('index');
 });
