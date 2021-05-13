@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('../config/ppConfig');
 const db = require('../models');
 
+// Get Routes
 router.get('/signup', (req, res) => {
   res.render('auth/signup');
 });
@@ -11,6 +12,14 @@ router.get('/login', (req, res) => {
   res.render('auth/login');
 });
 
+router.post('/logout', (req, res) => {
+  req.logOut(); //removes session
+  req.flash('success', 'See you next time!');
+  req.redirect('/');
+})
+
+
+// Post Routes
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/auth/login',
