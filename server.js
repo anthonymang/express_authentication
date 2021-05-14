@@ -17,20 +17,22 @@ app.use(require('morgan')('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);
+
 app.use(session({
   secret: SECRET_SESSION,
   resave: false,
   saveUninitialized: true
 }));
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use((req, res, next) =>{
   console.log(res.locals)
   res.locals.alerts = req.flash();
   res.locals.currentUser = req.user;
   next();
 })
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 // ROUTES
 app.get('/', (req, res) => {
