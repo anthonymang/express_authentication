@@ -12,10 +12,10 @@ router.get('/login', (req, res) => {
   res.render('auth/login');
 });
 
-router.post('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
   req.logOut(); //removes session
   req.flash('success', 'See you next time!');
-  req.redirect('/');
+  res.redirect('/');
 })
 
 
